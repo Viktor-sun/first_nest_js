@@ -34,4 +34,25 @@ export class CustomerService {
       where: { id: id },
     });
   }
+
+  // ====================================================
+  // search() {
+  //   return this.prisma.order.findMany({
+  //     where: { customerId: 1 },
+  //     include: { products: true, customer: true },
+  //   });
+  // }
+
+  //  2 joins
+  // search() {
+  //   return this.prisma.customer.findMany({
+  //     where: { id: 1 },
+  //     include: {
+  //       customerPreference: true,
+  //       order: {
+  //         include: { products: true },
+  //       },
+  //     },
+  //   });
+  // }
 }

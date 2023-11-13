@@ -17,6 +17,11 @@ import { CustomerModel } from './customer.model/customer.model';
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
+  // @Get('/fetch')
+  // async getAll() {
+  //   return this.customerService.search();
+  // }
+
   @Get()
   async getAllCustomers(): Promise<CustomerModel[]> {
     return this.customerService.getAllCustomers();

@@ -8,8 +8,52 @@ datasource db {
 }
 
 model Customer {
-  id   Int    @id @default(autoincrement())
-  name String
-  age  Int
-  city String
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  age                Int
+  city               String
+  role               Role                @default(USER)
+  order              Order[]
+  customerPreference CustomerPreference?
+  // @@index([city])
+
+  @@unique([name])
+}
+
+model CustomerPreference {
+  id         String   @id @default(uuid())
+  delivery   Boolean  @default(false)
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int      @unique
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+
+  products Product[]
+}
+
+model Product {
+  id    String     @id @default(uuid())
+  name  String
+  brand String
+  price String
+  type  PoductType
+
+  orders Order[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PoductType {
+  APPLIANCES
+  CLOTHING
 }
